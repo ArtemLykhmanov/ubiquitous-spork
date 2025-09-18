@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: knote-java-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: knote-java
+  template:
+    metadata:
+      labels:
+        app: knote-java
+    spec:
+      containers:
+      - name: knote-java
+        image: lykhmanovartem/knote-java:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATA_MONGODB_URI
+          value: "mongodb://admin:password@mongo-service:27017"
